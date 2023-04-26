@@ -1,12 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const TransactionTable = ({ transactions, onAddTransaction }) => {
+const TransactionTable = ({ transactions }) => {
+  const [searchTerm, setSearchTerm] = useState('');
   const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [amount, setAmount] = useState('');
 
-  const handleFormSubmit = (event) => {
+  const handleSearch = event => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleDateChange = event => {
+    setDate(event.target.value);
+  };
+
+  const handleDescriptionChange = event => {
+    setDescription(event.target.value);
+  };
+
+  const handleCategoryChange = event => {
+    setCategory(event.target.value);
+  };
+
+  const handleAmountChange = event => {
+    setAmount(event.target.value);
+  };
+
+  const handleSubmit = event => {
     event.preventDefault();
     const newTransaction = {
       date,
@@ -14,56 +35,76 @@ const TransactionTable = ({ transactions, onAddTransaction }) => {
       category,
       amount
     };
-    onAddTransaction(newTransaction);
+    console.log(newTransaction);
     setDate('');
     setDescription('');
     setCategory('');
     setAmount('');
-  }
+  };
+
+  const filteredTransactions = transactions.filter(transaction => {
+    const searchTermLower = searchTerm.toLowerCase();
+    return (
+      transaction.date.toLowerCase().includes(searchTermLower) ||
+      transaction.description.toLowerCase().includes(searchTermLower) ||
+      transaction.category.toLowerCase().includes(searchTermLower) ||
+      transaction.amount.toLowerCase().includes(searchTermLower)
+    );
+  });
 
   return (
-    <div className="table-responsive mt-5">
-      <form onSubmit={handleFormSubmit}>
-        <div className="row">
-          <div className="col-md-3">
+    <div className='container'>
+      <div className="mb-3 d-flex justify-content-center">
+        <input
+          type="text"
+          placeholder="Search transactions"
+          value={searchTerm}
+          onChange={handleSearch}
+          className="form-control me-2"
+        />
+      </div>
+      <form onSubmit={handleSubmit}>
+        <div className="row g-3">
+          <div className="col-sm-2">
             <input
               type="date"
-              className="form-control mb-2 mr-sm-2"
-              placeholder="Date"
               value={date}
-              onChange={(event) => setDate(event.target.value)}
+              onChange={handleDateChange}
+              className="form-control"
             />
           </div>
-          <div className="col-md-3">
+          <div className="col-sm-4">
             <input
               type="text"
-              className="form-control mb-2 mr-sm-2"
               placeholder="Description"
               value={description}
-              onChange={(event) => setDescription(event.target.value)}
+              onChange={handleDescriptionChange}
+              className="form-control"
             />
           </div>
-          <div className="col-md-3">
+          <div className="col-sm-2">
             <input
               type="text"
-              className="form-control mb-2 mr-sm-2"
               placeholder="Category"
               value={category}
-              onChange={(event) => setCategory(event.target.value)}
+              onChange={handleCategoryChange}
+              className="form-control"
             />
           </div>
-          <div className="col-md-3">
+          <div className="col-sm-2">
             <input
-              type="number"
-              className="form-control mb-2 mr-sm-2"
+              type="text"
               placeholder="Amount"
               value={amount}
-              onChange={(event) => setAmount(event.target.value)}
+              onChange={handleAmountChange}
+              className="form-control"
             />
           </div>
-        </div>
-        <div className="text-center">
-          <button type="submit" className="btn btn-primary">Add Transaction</button>
+          <div className="col-sm-2 d-grid">
+            <button type="submit" className="btn btn-primary">
+              Add Transaction
+            </button>
+          </div>
         </div>
       </form>
       <table className="table table-striped mt-3">
@@ -76,7 +117,7 @@ const TransactionTable = ({ transactions, onAddTransaction }) => {
           </tr>
         </thead>
         <tbody>
-          {transactions.map(transaction => (
+          {filteredTransactions.map(transaction => (
             <tr key={transaction.id}>
               <td>{transaction.date}</td>
               <td>{transaction.description}</td>
@@ -88,6 +129,6 @@ const TransactionTable = ({ transactions, onAddTransaction }) => {
       </table>
     </div>
   );
-}
+};
 
 export default TransactionTable;

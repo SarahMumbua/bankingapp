@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TransactionTable from './components/TransactionTable';
+import Header from './components/Header';
 
 const App = () => {
   const [transactions, setTransactions] = useState([]);
@@ -21,6 +22,8 @@ const App = () => {
   return (
     
     <div>
+      <Header />
+      
       <TransactionTable transactions={transactions} />
     </div>
   );
