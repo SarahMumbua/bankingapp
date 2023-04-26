@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const TransactionTable = ({ transactions }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -45,10 +45,7 @@ const TransactionTable = ({ transactions }) => {
   const filteredTransactions = transactions.filter(transaction => {
     const searchTermLower = searchTerm.toLowerCase();
     return (
-      transaction.date.toLowerCase().includes(searchTermLower) ||
-      transaction.description.toLowerCase().includes(searchTermLower) ||
-      transaction.category.toLowerCase().includes(searchTermLower) ||
-      transaction.amount.toLowerCase().includes(searchTermLower)
+      transaction.description.toLowerCase().includes(searchTermLower)
     );
   });
 
