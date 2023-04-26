@@ -1,73 +1,72 @@
 import React, { useState } from 'react';
 
-const TransactionTable = ({ transactions }) => {
-  const [form, setForm] = useState({
-    date: '',
-    description: '',
-    category: '',
-    amount: ''
-  });
+const TransactionTable = ({ transactions, onAddTransaction }) => {
+  const [date, setDate] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('');
+  const [amount, setAmount] = useState('');
 
-  const handleFormChange = (event) => {
-    const { name, value } = event.target;
-    setForm((prevState) => ({ ...prevState, [name]: value }));
-  };
-
-  const handleSubmit = (event) => {
+  const handleFormSubmit = (event) => {
     event.preventDefault();
-    console.log(form);
-    // Call an API or add the form data to the table
-  };
+    const newTransaction = {
+      date,
+      description,
+      category,
+      amount
+    };
+    onAddTransaction(newTransaction);
+    setDate('');
+    setDescription('');
+    setCategory('');
+    setAmount('');
+  }
 
   return (
-    <div className="container my-4">
-      <form onSubmit={handleSubmit}>
-        <div className="row mb-3">
-          <div className="col-sm-3">
+    <div className="table-responsive mt-5">
+      <form onSubmit={handleFormSubmit}>
+        <div className="row">
+          <div className="col-md-3">
             <input
               type="date"
-              className="form-control"
-              name="date"
-              value={form.date}
-              onChange={handleFormChange}
+              className="form-control mb-2 mr-sm-2"
+              placeholder="Date"
+              value={date}
+              onChange={(event) => setDate(event.target.value)}
             />
           </div>
-          <div className="col-sm-3">
+          <div className="col-md-3">
             <input
               type="text"
-              className="form-control"
+              className="form-control mb-2 mr-sm-2"
               placeholder="Description"
-              name="description"
-              value={form.description}
-              onChange={handleFormChange}
+              value={description}
+              onChange={(event) => setDescription(event.target.value)}
             />
           </div>
-          <div className="col-sm-3">
+          <div className="col-md-3">
             <input
               type="text"
-              className="form-control"
+              className="form-control mb-2 mr-sm-2"
               placeholder="Category"
-              name="category"
-              value={form.category}
-              onChange={handleFormChange}
+              value={category}
+              onChange={(event) => setCategory(event.target.value)}
             />
           </div>
-          <div className="col-sm-3">
+          <div className="col-md-3">
             <input
               type="number"
-              className="form-control"
+              className="form-control mb-2 mr-sm-2"
               placeholder="Amount"
-              name="amount"
-              value={form.amount}
-              onChange={handleFormChange}
+              value={amount}
+              onChange={(event) => setAmount(event.target.value)}
             />
           </div>
         </div>
-        <button type="submit" className="btn btn-primary mb-3">
-          Add Transaction
-        </button>
+        <div className="text-center">
+          <button type="submit" className="btn btn-primary">Add Transaction</button>
+        </div>
       </form>
-      <table className="table table-bordered table-striped table-hover">
+      <table className="table table-striped mt-3">
         <thead>
           <tr>
             <th>Date</th>
@@ -77,7 +76,7 @@ const TransactionTable = ({ transactions }) => {
           </tr>
         </thead>
         <tbody>
-          {transactions.map((transaction) => (
+          {transactions.map(transaction => (
             <tr key={transaction.id}>
               <td>{transaction.date}</td>
               <td>{transaction.description}</td>
@@ -89,6 +88,6 @@ const TransactionTable = ({ transactions }) => {
       </table>
     </div>
   );
-};
+}
 
 export default TransactionTable;
