@@ -97,7 +97,48 @@
       "category": "Food",
       "amount": "3000",
       "id": 14
+    },
+    {
+      "date": "2023-04-27",
+      "description": "Transport",
+      "category": "Transportation",
+      "amount": "10",
+      "id": 15
+    },
+    {
+      "date": "",
+      "description": "",
+      "category": "",
+      "amount": "",
+      "id": 16
+    },
+    {
+      "date": "",
+      "description": "",
+      "category": "",
+      "amount": "",
+      "id": 17
+    },
+    {
+      "date": "2023-04-27",
+      "description": "Food",
+      "category": "Food",
+      "amount": "17",
+      "id": 18
+    },
+    {
+      "date": "2023-04-27",
+      "description": "Chip",
+      "category": "food",
+      "amount": "10",
+      "id": 19
+    },
+    {
+      "date": "2023-04-27",
+      "description": "Fare to Town",
+      "category": "Food",
+      "amount": "18",
+      "id": 20
     }
   ]
- }
- 
+}
