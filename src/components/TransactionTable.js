@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const TransactionTable = ({ transactions }) => {
+const TransactionTable = ({ transactions, setTransactions }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [date, setDate] = useState('');
     const [description, setDescription] = useState('');
@@ -35,7 +35,7 @@ const TransactionTable = ({ transactions }) => {
             category,
             amount
         };
-        fetch('http://localhost:3000/transactions', {
+        fetch('http://localhost:3001/transactions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -56,10 +56,26 @@ const TransactionTable = ({ transactions }) => {
             });
     };
 
+    const handleDelete = id => {
+        fetch(`http://localhost:3001/transactions/${id}`, {
+            method: 'DELETE',
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to delete transaction');
+                }
+                setTransactions(transactions.filter(transaction => transaction.id !== id));
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    };
+
     const filteredTransactions = transactions.filter(transaction => {
         const searchTermLower = searchTerm.toLowerCase();
         return (
-            transaction.description.toLowerCase().includes(searchTermLower)
+            transaction.description.toLowerCase().includes(searchTermLower) ||
+            transaction.category.toLowerCase().includes(searchTermLower)
         );
     });
 
@@ -134,6 +150,9 @@ const TransactionTable = ({ transactions }) => {
                             <td>{transaction.description}</td>
                             <td>{transaction.category}</td>
                             <td>{transaction.amount}</td>
+                            <td>
+                                <button className ="btn btn-danger" onClick={() => handleDelete(transaction.id)}>Delete</button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

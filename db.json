@@ -1,20 +1,6 @@
 {
   "transactions": [
     {
-      "id": 1,
-      "date": "2019-12-01",
-      "description": "Paycheck from Bob's Burgers",
-      "category": "Income",
-      "amount": 1000
-    },
-    {
-      "id": 2,
-      "date": "2019-12-01",
-      "description": "South by Southwest Quinoa Bowl at Fresh & Co",
-      "category": "Food",
-      "amount": -10.55
-    },
-    {
       "id": 3,
       "date": "2019-12-02",
       "description": "South by Southwest Quinoa Bowl at Fresh & Co",
@@ -88,57 +74,15 @@
       "date": "2022-07-09",
       "description": "Office lunch",
       "category": "Food",
-      "amount": "2000",
+      "amount": 2000,
       "id": 13
     },
     {
       "date": "2022-07-09",
       "description": "Office lunch Wednesday",
       "category": "Food",
-      "amount": "3000",
+      "amount": 3000,
       "id": 14
-    },
-    {
-      "date": "2023-04-27",
-      "description": "Transport",
-      "category": "Transportation",
-      "amount": "10",
-      "id": 15
-    },
-    {
-      "date": "",
-      "description": "",
-      "category": "",
-      "amount": "",
-      "id": 16
-    },
-    {
-      "date": "",
-      "description": "",
-      "category": "",
-      "amount": "",
-      "id": 17
-    },
-    {
-      "date": "2023-04-27",
-      "description": "Food",
-      "category": "Food",
-      "amount": "17",
-      "id": 18
-    },
-    {
-      "date": "2023-04-27",
-      "description": "Chip",
-      "category": "food",
-      "amount": "10",
-      "id": 19
-    },
-    {
-      "date": "2023-04-27",
-      "description": "Fare to Town",
-      "category": "Food",
-      "amount": "18",
-      "id": 20
     }
   ]
 }
