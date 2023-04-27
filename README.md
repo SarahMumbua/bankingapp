@@ -6,7 +6,7 @@ This is a web project that allows user to list bank transactions , add transacti
 ## Setup/Installation Requirements
 * Clone the project repository into your local machine ie git clone: git@github.com:SarahMumbua/bankingapp.git
 * install json-server ie npm install -g json-server
-* start the server locally by running json-server --watch db.json
+* start the server locally by running: json-server --watch db.json --port 3001
 * application will start on the browser
 ## Known Bugs
 At the moment there are no known bugs.
